@@ -3,73 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Quantum Chemistry Quiz</title>
+    <title>Quantum Chemistry Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #ffffff;
+            color: #000;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
-            padding: 1em 0;
             text-align: center;
+            padding: 10px 0;
         }
         .quiz-container {
-            max-width: 800px;
-            margin: 2em auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
         .quiz-header {
-            padding: 1em;
-            background-color: #4CAF50;
-            color: white;
             text-align: center;
         }
         section {
-            padding: 2em;
+            margin: 10px 0;
         }
         .question {
-            margin: 1em 0;
+            margin: 10px 0;
         }
         .options {
             list-style-type: none;
             padding: 0;
         }
         .options li {
-            margin: 0.5em 0;
+            margin: 5px 0;
         }
         .btn {
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
-            padding: 0.5em 1em;
+            padding: 5px 10px;
             border: none;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
         }
         .btn:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
         .timer {
-            font-size: 1.2em;
             font-weight: bold;
-            color: #d9534f;
+            color: red;
         }
-        .hidden {
+        .feedback {
             display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            animation: correctFeedback 1s ease-in-out;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            animation: incorrectFeedback 1s ease-in-out;
+        }
+        @keyframes correctFeedback {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes incorrectFeedback {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Advanced Quantum Chemistry Quiz</h1>
+    <h1>Quantum Chemistry Quiz</h1>
 </header>
 
 <div class="quiz-container">
@@ -82,7 +102,9 @@
         <!-- Questions will be dynamically inserted here -->
     </section>
 
-    <div style="text-align: center; padding: 1em;">
+    <div id="feedback" class="feedback"></div>
+
+    <div style="text-align: center; margin-top: 10px;">
         <button class="btn" id="next-btn">Next Topic</button>
     </div>
 </div>
@@ -92,166 +114,175 @@
         {
             title: "Introduction to Quantum Chemistry",
             questions: [
-                { question: "What is Quantum Chemistry primarily concerned with?", options: ["Atomic structure", "Chemical thermodynamics", "Molecular bonding", "Reaction kinetics"], correct: 0 },
-                { question: "Who proposed the concept of quantized energy levels?", options: ["Einstein", "Planck", "Bohr", "Rutherford"], correct: 1 },
-                { question: "What is the main focus of quantum mechanics?", options: ["Microscopic particles", "Macroscopic particles", "Classical mechanics", "Thermodynamics"], correct: 0 },
-                { question: "What does the Schrödinger equation describe?", options: ["Particle energy levels", "Particle wavefunction", "Particle spin", "Particle charge"], correct: 1 },
-                { question: "What is a quantum?", options: ["A discrete packet of energy", "A large energy cluster", "A massless particle", "A charge carrier"], correct: 0 }
+                { question: "What is the primary focus of quantum chemistry?", options: ["Chemical bonding", "Reaction mechanisms", "Atomic and subatomic systems", "Molecular weight calculations"], correct: 2 },
+                { question: "Who is known as the father of quantum theory?", options: ["Einstein", "Max Planck", "Niels Bohr", "Erwin Schrödinger"], correct: 1 },
+                { question: "What constant is associated with quantum mechanics?", options: ["Planck's constant", "Gravitational constant", "Speed of light", "Avogadro's number"], correct: 0 },
+                { question: "What does quantum chemistry study?", options: ["Only molecules", "Properties of gases", "Wave-particle behavior", "Solid-state physics"], correct: 2 },
+                { question: "Which equation forms the basis of quantum chemistry?", options: ["Newton's equation", "Schrödinger equation", "Bohr's equation", "Einstein's equation"], correct: 1 }
             ]
         },
         {
             title: "Structure of an Atom",
             questions: [
-                { question: "What is the smallest part of an element called?", options: ["Atom", "Molecule", "Proton", "Electron"], correct: 0 },
-                { question: "Which subatomic particle has no charge?", options: ["Proton", "Electron", "Neutron", "Nucleus"], correct: 2 },
-                { question: "What is the nucleus composed of?", options: ["Electrons", "Protons and neutrons", "Neutrons only", "Protons only"], correct: 1 },
-                { question: "What charge does a proton carry?", options: ["Negative", "Neutral", "Positive", "No charge"], correct: 2 },
-                { question: "Who discovered the electron?", options: ["Rutherford", "Thomson", "Bohr", "Planck"], correct: 1 }
+                { question: "What is the central part of an atom called?", options: ["Electron", "Nucleus", "Proton", "Neutron"], correct: 1 },
+                { question: "Which subatomic particle has a negative charge?", options: ["Proton", "Electron", "Neutron", "Nucleus"], correct: 1 },
+                { question: "What determines the atomic number of an atom?", options: ["Number of neutrons", "Number of protons", "Number of electrons", "Total mass"], correct: 1 },
+                { question: "Who discovered the electron?", options: ["J.J. Thomson", "Rutherford", "Niels Bohr", "Max Planck"], correct: 0 },
+                { question: "Which particle is neutral in charge?", options: ["Proton", "Electron", "Neutron", "Photon"], correct: 2 }
             ]
         },
         {
             title: "Rutherford's Atomic Model",
             questions: [
-                { question: "What experiment led to Rutherford's atomic model?", options: ["Oil drop experiment", "Gold foil experiment", "Cathode ray experiment", "Photoelectric experiment"], correct: 1 },
-                { question: "What does Rutherford's model propose about the nucleus?", options: ["Contains electrons", "Positively charged", "Negatively charged", "Neutral"], correct: 1 },
-                { question: "What surrounds the nucleus in Rutherford's model?", options: ["Protons", "Electrons", "Neutrons", "Atoms"], correct: 1 },
-                { question: "What was a limitation of Rutherford's model?", options: ["No protons discovered", "No electrons discovered", "Couldn't explain atomic stability", "No experimental evidence"], correct: 2 },
-                { question: "Who disproved Rutherford's model?", options: ["Bohr", "Thomson", "Heisenberg", "Einstein"], correct: 0 }
+                { question: "What experiment led to Rutherford's atomic model?", options: ["Photoelectric effect", "Gold foil experiment", "Cathode ray experiment", "Double-slit experiment"], correct: 1 },
+                { question: "What did Rutherford's model introduce?", options: ["Quantum levels", "Atomic nucleus", "Wave-particle duality", "Electron shells"], correct: 1 },
+                { question: "What charge does the nucleus carry?", options: ["Neutral", "Positive", "Negative", "Variable"], correct: 1 },
+                { question: "What was the major limitation of Rutherford's model?", options: ["No neutrons", "No explanation for stability", "Ignored electrons", "No nucleus"], correct: 1 },
+                { question: "Who discovered the proton?", options: ["Chadwick", "Rutherford", "Bohr", "Thomson"], correct: 1 }
             ]
         },
         {
             title: "Wave Nature of Radiations",
             questions: [
-                { question: "Who proposed the wave theory of light?", options: ["Newton", "Huygens", "Maxwell", "Einstein"], correct: 1 },
-                { question: "What property of light is explained by its wave nature?", options: ["Photoelectric effect", "Interference", "Reflection", "Refraction"], correct: 1 },
-                { question: "What is the wavelength of light inversely proportional to?", options: ["Frequency", "Speed", "Amplitude", "Intensity"], correct: 0 },
-                { question: "What does the electromagnetic spectrum represent?", options: ["Different wavelengths of light", "Speed of light", "Light refraction", "Light absorption"], correct: 0 },
-                { question: "What is the speed of light in a vacuum?", options: ["3.0 x 10^8 m/s", "2.5 x 10^8 m/s", "1.5 x 10^8 m/s", "3.0 x 10^7 m/s"], correct: 0 }
+                { question: "Who proposed that light behaves as a wave?", options: ["Newton", "Maxwell", "Planck", "Einstein"], correct: 1 },
+                { question: "What is the relationship between wavelength and frequency?", options: ["Direct", "Inverse", "None", "Equal"], correct: 1 },
+                { question: "What is the speed of light in a vacuum?", options: ["300,000 km/s", "3,000 km/s", "300 km/s", "3 km/s"], correct: 0 },
+                { question: "What phenomenon shows light interference?", options: ["Reflection", "Diffraction", "Refraction", "Absorption"], correct: 1 },
+                { question: "What determines the energy of light?", options: ["Wavelength", "Frequency", "Amplitude", "Speed"], correct: 1 }
             ]
         },
         {
             title: "Photoelectric Effect",
             questions: [
-                { question: "Who explained the photoelectric effect?", options: ["Planck", "Einstein", "Bohr", "Rutherford"], correct: 1 },
-                { question: "What particle is emitted in the photoelectric effect?", options: ["Proton", "Neutron", "Photon", "Electron"], correct: 3 },
-                { question: "What triggers the photoelectric effect?", options: ["High intensity light", "Low frequency light", "High frequency light", "Infrared light"], correct: 2 },
-                { question: "What is the energy of emitted electrons proportional to?", options: ["Intensity", "Frequency", "Wavelength", "Amplitude"], correct: 1 },
-                { question: "What concept did the photoelectric effect confirm?", options: ["Wave nature of light", "Particle nature of light", "Refraction", "Diffraction"], correct: 1 }
+                { question: "Who explained the photoelectric effect?", options: ["Planck", "Einstein", "Bohr", "Schrödinger"], correct: 1 },
+                { question: "What type of particles are emitted in the photoelectric effect?", options: ["Protons", "Electrons", "Neutrons", "Photons"], correct: 1 },
+                { question: "What is the minimum energy required to emit electrons?", options: ["Work function", "Threshold frequency", "Planck's constant", "Photon energy"], correct: 0 },
+                { question: "What happens when light above threshold frequency hits metal?", options: ["Heat", "Electron emission", "Color change", "No effect"], correct: 1 },
+                { question: "What did the photoelectric effect demonstrate?", options: ["Wave nature of light", "Particle nature of light", "Atomic structure", "Chemical bonding"], correct: 1 }
             ]
         },
         {
             title: "Bohr Model of the Atom",
             questions: [
-                { question: "What does Bohr's model introduce?", options: ["Orbitals", "Energy levels", "Quantum numbers", "Electron cloud"], correct: 1 },
-                { question: "What element's spectrum did Bohr study?", options: ["Helium", "Oxygen", "Hydrogen", "Nitrogen"], correct: 2 },
-                { question: "What keeps electrons in stable orbits?", options: ["Magnetic forces", "Quantum leaps", "Electrostatic attraction", "Gravitational pull"], correct: 2 },
-                { question: "What was a limitation of Bohr's model?", options: ["Only valid for hydrogen", "No nucleus included", "No electrons included", "No experimental basis"], correct: 0 },
-                { question: "What quantum number is related to energy levels?", options: ["Principal", "Azimuthal", "Magnetic", "Spin"], correct: 0 }
+                { question: "Who developed the Bohr model?", options: ["Planck", "Rutherford", "Bohr", "Einstein"], correct: 2 },
+                { question: "What does the Bohr model focus on?", options: ["Nucleus", "Protons", "Electron orbits", "Neutrons"], correct: 2 },
+                { question: "What is quantized in the Bohr model?", options: ["Electron speed", "Electron energy levels", "Nucleus size", "Atomic weight"], correct: 1 },
+                { question: "What does the Bohr model explain?", options: ["Atomic emission spectra", "Solid-state physics", "Chemical bonding", "Nuclear reactions"], correct: 0 },
+                { question: "What is the major limitation of the Bohr model?", options: ["No neutrons", "No explanation for spectra of larger atoms", "Ignored nucleus", "No orbits"], correct: 1 }
             ]
         },
         {
             title: "Wave-Particle Duality",
             questions: [
-                { question: "Who proposed wave-particle duality?", options: ["Einstein", "Planck", "De Broglie", "Bohr"], correct: 2 },
-                { question: "What property does wave-particle duality describe?", options: ["Wave nature of matter", "Energy levels", "Electron charge", "Atomic weight"], correct: 0 },
-                { question: "What experiment supports wave-particle duality?", options: ["Photoelectric effect", "Double-slit experiment", "Oil drop experiment", "Gold foil experiment"], correct: 1 },
-                { question: "What is the De Broglie equation?", options: ["E = mc^2", "λ = h/p", "F = ma", "P = mv"], correct: 1 },
-                { question: "What does duality apply to?", options: ["Only photons", "Only electrons", "All particles", "Only protons"], correct: 2 }
+                { question: "Who proposed wave-particle duality?", options: ["Einstein", "Planck", "de Broglie", "Bohr"], correct: 2 },
+                { question: "What does wave-particle duality describe?", options: ["Electrons only", "Light only", "Both light and matter", "None"], correct: 2 },
+                { question: "What experiment demonstrated duality for electrons?", options: ["Double-slit experiment", "Photoelectric effect", "Gold foil experiment", "Cathode rays"], correct: 0 },
+                { question: "What property is associated with particles in motion?", options: ["Wavefunction", "Mass", "Wavelength", "Energy"], correct: 2 },
+                { question: "What equation relates wavelength to momentum?", options: ["Planck's equation", "Einstein's equation", "de Broglie equation", "Newton's equation"], correct: 2 }
             ]
         },
         {
             title: "Heisenberg's Uncertainty Principle",
             questions: [
-                { question: "What does the uncertainty principle state?", options: ["Energy and time cannot be measured simultaneously", "Position and momentum cannot be measured simultaneously", "Velocity and position cannot be measured simultaneously", "Mass and velocity cannot be measured simultaneously"], correct: 1 },
-                { question: "What is the mathematical form of uncertainty?", options: ["ΔxΔp ≥ h", "ΔxΔp ≥ h/4π", "ΔxΔp ≤ h", "ΔxΔp ≤ h/4π"], correct: 1 },
-                { question: "What did the uncertainty principle challenge?", options: ["Classical mechanics", "Electromagnetism", "Thermodynamics", "Quantum mechanics"], correct: 0 },
-                { question: "Who proposed the uncertainty principle?", options: ["Schrödinger", "Heisenberg", "Bohr", "Planck"], correct: 1 },
-                { question: "What does the principle apply to?", options: ["Macroscopic particles", "Microscopic particles", "All particles", "Only photons"], correct: 1 }
-            ]
-        },
-        {
-            title: "Schrödinger Equation",
-            questions: [
-                { question: "What does the Schrödinger equation describe?", options: ["Particle position", "Wavefunction", "Momentum", "Energy levels"], correct: 1 },
-                { question: "What is the time-independent Schrödinger equation used for?", options: ["Static systems", "Dynamic systems", "Energy conservation", "Momentum calculation"], correct: 0 },
-                { question: "What does the square of the wavefunction represent?", options: ["Probability density", "Momentum", "Energy", "Wave velocity"], correct: 0 },
-                { question: "What kind of operator is used in the equation?", options: ["Position operator", "Hamiltonian operator", "Momentum operator", "Energy operator"], correct: 1 },
-                { question: "Who proposed the Schrödinger equation?", options: ["Planck", "Heisenberg", "Schrödinger", "Einstein"], correct: 2 }
+                { question: "What does the uncertainty principle state?", options: ["Speed and position", "Position and momentum", "Energy and time", "Mass and velocity"], correct: 1 },
+                { question: "Who proposed the uncertainty principle?", options: ["Einstein", "Heisenberg", "Bohr", "Planck"], correct: 1 },
+                { question: "What is the product of uncertainties limited by?", options: ["Planck's constant", "Speed of light", "Avogadro's number", "Boltzmann constant"], correct: 0 },
+                { question: "What does the uncertainty principle apply to?", options: ["Large objects", "Subatomic particles", "Waves", "Nucleus only"], correct: 1 },
+                { question: "What does the uncertainty principle challenge?", options: ["Atomic structure", "Determinism in physics", "Chemical reactions", "Wave theory"], correct: 1 }
             ]
         }
     ];
 
-    let currentTopic = 0;
-    let currentQuestion = 0;
-    let timeLeft = 30;
-    let timer;
+    let currentTopicIndex = 0;
+    let currentQuestionIndex = 0;
+    let timerInterval;
+
+    const topicTitle = document.getElementById('topic-title');
+    const quizSection = document.getElementById('quiz-section');
+    const feedbackDiv = document.getElementById('feedback');
+    const nextBtn = document.getElementById('next-btn');
+    const timerDisplay = document.getElementById('timer');
 
     function loadQuestion() {
-        const topic = topics[currentTopic];
-        const questionData = topic.questions[currentQuestion];
-        document.getElementById("topic-title").textContent = topic.title;
+        const currentTopic = topics[currentTopicIndex];
+        const currentQuestion = currentTopic.questions[currentQuestionIndex];
 
-        const quizSection = document.getElementById("quiz-section");
+        topicTitle.textContent = currentTopic.title;
         quizSection.innerHTML = `
-            <div class="question">
-                <h3>${questionData.question}</h3>
-                <ul class="options">
-                    ${questionData.options.map((opt, i) => `<li><button class="btn option-btn" onclick="checkAnswer(${i})">${opt}</button></li>`).join('')}
-                </ul>
-            </div>
+            <div class="question">${currentQuestion.question}</div>
+            <ul class="options">
+                ${currentQuestion.options.map((option, index) => `<li><button class="btn option-btn" data-index="${index}">${option}</button></li>`).join('')}
+            </ul>
         `;
+        feedbackDiv.style.display = 'none';
+        startTimer();
+
+        document.querySelectorAll('.option-btn').forEach(button => {
+            button.addEventListener('click', checkAnswer);
+        });
+    }
+
+    function checkAnswer(event) {
+        const selectedOption = parseInt(event.target.dataset.index, 10);
+        const currentTopic = topics[currentTopicIndex];
+        const currentQuestion = currentTopic.questions[currentQuestionIndex];
+
+        stopTimer();
+
+        if (selectedOption === currentQuestion.correct) {
+            feedbackDiv.textContent = 'Correct! Great job!';
+            feedbackDiv.className = 'feedback correct';
+        } else {
+            feedbackDiv.textContent = `Incorrect! The correct answer was: ${currentQuestion.options[currentQuestion.correct]}`;
+            feedbackDiv.className = 'feedback incorrect';
+        }
+
+        feedbackDiv.style.display = 'block';
+    }
+
+    function nextQuestion() {
+        const currentTopic = topics[currentTopicIndex];
+
+        if (currentQuestionIndex < currentTopic.questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+        } else if (currentTopicIndex < topics.length - 1) {
+            currentTopicIndex++;
+            currentQuestionIndex = 0;
+            loadQuestion();
+        } else {
+            quizSection.innerHTML = '<div class="question">You have completed the quiz! Well done!</div>';
+            nextBtn.style.display = 'none';
+        }
     }
 
     function startTimer() {
-        timeLeft = 30;
-        document.getElementById("timer").textContent = timeLeft;
-        timer = setInterval(() => {
+        let timeLeft = 30;
+        timerDisplay.textContent = timeLeft;
+
+        timerInterval = setInterval(() => {
             timeLeft--;
-            document.getElementById("timer").textContent = timeLeft;
+            timerDisplay.textContent = timeLeft;
 
             if (timeLeft <= 0) {
-                clearInterval(timer);
-                alert("Time's up! Moving to the next question.");
+                clearInterval(timerInterval);
+                feedbackDiv.textContent = `Time's up! Moving to the next question.`;
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.style.display = 'block';
                 nextQuestion();
             }
         }, 1000);
     }
 
-    function checkAnswer(selected) {
-        clearInterval(timer);
-        const correct = topics[currentTopic].questions[currentQuestion].correct;
-        if (selected === correct) {
-            alert("Correct Answer!");
-        } else {
-            alert("Wrong Answer. The correct answer was: " + topics[currentTopic].questions[currentQuestion].options[correct]);
-        }
-        nextQuestion();
+    function stopTimer() {
+        clearInterval(timerInterval);
     }
 
-    function nextQuestion() {
-        currentQuestion++;
-        if (currentQuestion >= topics[currentTopic].questions.length) {
-            currentQuestion = 0;
-            currentTopic++;
-            if (currentTopic >= topics.length) {
-                alert("Quiz Completed!");
-                document.getElementById("quiz-section").innerHTML = "<h2>Thank you for participating!</h2>";
-                document.getElementById("next-btn").style.display = "none";
-                return;
-            }
-        }
-        loadQuestion();
-        startTimer();
-    }
+    nextBtn.addEventListener('click', nextQuestion);
 
-    document.getElementById("next-btn").addEventListener("click", nextQuestion);
-
-    // Start the quiz
     loadQuestion();
-    startTimer();
 </script>
 
 </body>
 </html>
-
 
