@@ -1,86 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rutherford's Atomic Model Quiz">
-  <title>Rutherford's Atomic Model Quiz</title>
-  <link rel="stylesheet" href="quiz-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+        }
+
+        .options label {
+            cursor: pointer;
+            display: block;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .options .correct-answer {
+            border-color: green;
+            background-color: #d4edda;
+        }
+
+        .options .incorrect-answer {
+            border-color: red;
+            background-color: #f8d7da;
+        }
+
+        .options .highlighted {
+            border-color: #007bff;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        .correct-answer-text {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .navigation button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .navigation button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Hide the next button when we are at the last question */
+        .hidden {
+            display: none;
+        }
+
+        /* Hide the previous button on the first question */
+        .hidden-prev {
+            display: none;
+        }
+
+        /* Disable radio buttons */
+        .disabled input[type="radio"] {
+            pointer-events: none;
+        }
+    </style>
+    <!-- Include MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <header class="quiz-header">
-    <h1>Rutherford's Atomic Model Quiz</h1>
-    <p>Test your knowledge of Rutherford's contributions to atomic theory.</p>
-  </header>
 
-  <main>
-    <section class="quiz-container">
-      <form id="quiz-form">
-        <!-- Question 1 -->
-        <div class="question" id="q1">
-          <h2>1. What was the key experiment that led Rutherford to propose his atomic model?</h2>
-          <label><input type="radio" name="q1" value="a"> Gold Foil Experiment</label><br>
-          <label><input type="radio" name="q1" value="b"> Oil Drop Experiment</label><br>
-          <label><input type="radio" name="q1" value="c"> Cathode Ray Experiment</label><br>
-          <label><input type="radio" name="q1" value="d"> Electron Beam Experiment</label>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz">
+            <!-- Questions will be dynamically inserted here -->
+            <div class="question">
+                <p id="questionText">What is the capital of France?</p>
+                <ul class="options" id="optionsList">
+                    <li><input type="radio" name="answer" value="A" id="optA"><label for="optA">A. Berlin</label></li>
+                    <li><input type="radio" name="answer" value="B" id="optB"><label for="optB">B. Madrid</label></li>
+                    <li><input type="radio" name="answer" value="C" id="optC"><label for="optC">C. Paris</label></li>
+                    <li><input type="radio" name="answer" value="D" id="optD"><label for="optD">D. Rome</label></li>
+                </ul>
+            </div>
+            <button class="btn" onclick="checkAnswer()">Submit</button>
+            <div id="result" class="result"></div>
+            <div class="navigation">
+                <button id="prevBtn" class="hidden-prev" onclick="previousQuestion()">Previous</button>
+                <button id="nextBtn" onclick="nextQuestion()">Next</button>
+            </div>
         </div>
-
-        <!-- Question 2 -->
-        <div class="question" id="q2">
-          <h2>2. What was the main conclusion from Rutherford's Gold Foil Experiment?</h2>
-          <label><input type="radio" name="q2" value="a"> Atoms are solid and indivisible</label><br>
-          <label><input type="radio" name="q2" value="b"> Electrons orbit around a dense nucleus</label><br>
-          <label><input type="radio" name="q2" value="c"> The nucleus is positively charged and contains most of the atom's mass</label><br>
-          <label><input type="radio" name="q2" value="d"> The nucleus is negatively charged</label>
+        <div id="scoreSection" class="hidden">
+            <h2>Your Score</h2>
+            <p id="score"></p>
         </div>
+    </div>
 
-        <!-- Question 3 -->
-        <div class="question" id="q3">
-          <h2>3. What did Rutherford's atomic model fail to explain?</h2>
-          <label><input type="radio" name="q3" value="a"> The stability of atoms</label><br>
-          <label><input type="radio" name="q3" value="b"> The presence of electrons</label><br>
-          <label><input type="radio" name="q3" value="c"> The existence of the nucleus</label><br>
-          <label><input type="radio" name="q3" value="d"> The mass of the nucleus</label>
-        </div>
+    <script>
+        const questions = [
+            {
+                question: "Q1. Calculate the number of protons, neutrons and electrons in an atom having atomic mass 80 and atomic number is 35.",
+                options: ["A) Protons: 35, Neutrons: 45, Electrons: 35", "B) Protons: 45, Neutrons: 35, Electrons: 45", "C) Protons: 80, Neutrons: 35, Electrons: 45", "D) Protons: 35, Neutrons: 35, Electrons: 80"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q2. The number of electrons, protons and neutrons in a species are equal to 16,16 and 16 respectively. Assign the proper symbol to the species.",
+                options: ["A) S", "B) Ca", "C) Ar", "D) C"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q3. The Vividh Bharati station of All India Radio, Delhi, broadcasts on a frequency of 1,368kHz (kilohertz). Calculate the wavelength of the electromagnetic radiation emitted by transmitter. Which part of the electromagnetic spectrum does it belong to?",
+                options: ["A) 219.2 m, Radio waves", "B) 219.2 km, Radio waves", "C) 219.2 nm, Visible light", "D) 219.2 µm, Infrared"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q4. The wavelength range of the visible spectrum extends from violet ( 400 nm ) to red ( 750 nm ). Express these wavelengths in frequencies (Hz).",
+                options: ["A) Violet: 7.5×10¹⁴ Hz, Red: 4.0×10¹⁴Hz", "B) Violet: 7.5×10¹¹Hz, Red: 4.0×10¹¹Hz", "C) Violet: 7.5×10¹⁶Hz, Red: 4.0×10¹⁶Hz", "D) Violet: 7.5×10¹³Hz, Red: 4.0×10¹³Hz"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q5. Calculate wavenumber and frequency of yellow radiation having wavelength 5800Å.",
+                options: ["A) Wavenumber: 1.724×10⁶m⁻¹, Frequency: 5.17×10¹⁴Hz", "B) Wavenumber: 1.724×10³m⁻¹, Frequency: 5.17×10¹¹Hz", "C) Wavenumber: 1.724×10⁹m⁻¹, Frequency: 5.17×10¹⁶Hz", "D) Wavenumber: 1.724×10¹²m⁻¹, Frequency: 5.17×10¹³Hz"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q6. Calculate energy of one mole of photons of radiation whose frequency is 5×10¹⁴Hz.",
+                options: ["A) 9.94×10⁴kJ", "B) 9.94×10²kJ", "C) 9.94×10³kJ", "D) 9.94×10⁵kJ"],
+                correctAnswer: "C"
+            },
+            {
+                question: "Q7. A 100 watt bulb emits monochromatic light of wavelength 400 nm . Calculate the number of photons emitted per second by the bulb.",
+                options: ["A) 3.1×10²⁰", "B)  3.1×10¹⁸", "C) 3.1×10²²", "D) 3.1×10¹⁹"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q8. When electromagnetic radiation of wavelength 300 nm falls on the surface of sodium, electrons are emitted with a kinetic energy of 1.68×10⁵Jmol⁻¹. What is the minimum energy needed to remove an electron from sodium? What is the maximum wavelength that will cause a photoelectron to be emitted?",
+                options: ["A) 1.68×10⁵Jmol⁻¹, 350 nm", "B) 2.68×10⁵Jmol⁻¹, 450 nm", "C) 3.68×10⁵Jmol⁻¹, 550 nm", "D) 4.68×10⁵Jmol⁻¹, 650 nm"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q9. The threshold frequency ν∘ for a metal is 7.0×10¹⁴s⁻¹. Calculate the kinetic energy of an electron emitted when radiation of frequency ν = 1.0×10¹⁵s⁻¹ hits the metal.",
+                options: ["A) 4.13×10⁻¹⁹J", "B) 4.13×10⁻¹⁸J", "C) 4.13×10⁻²⁰J", "D) 4.13×10⁻²¹J"],
+                correctAnswer: "B"
+            },
+            {
+                question: "Q10. What are the frequency and wavelength of a photon emitted during a transition from n = 5 state to the n = 2 state in the hydrogen atom?",
+                options: ["A) Frequency: 1.55×10¹⁵Hz, Wavelength: 193 nm", "B) Frequency: 1.55×10¹⁴Hz, Wavelength: 193 µm", "C) Frequency: 1.55×10¹⁶Hz, Wavelength: 193 pm", "D) Frequency: 1.55×10¹³Hz, Wavelength: 193 mm"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q11. (a) Calculate the KE of a photo electron emitted by sodium surface when light of wavelength 400 nm is incident on it. The work function of sodium is 3.653×10⁻¹⁹J.",
+                options: ["A) 1.51×10⁻¹⁹J", "B) 1.51×10⁻¹⁸J", "C) 1.51×10⁻²⁰J", "D) 1.51×10⁻²¹J"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q11. (b) Calculate the value of the longest wavelength which can result in the emission of a photoelectron from sodium surface.",
+                options: ["A) 540 nm", "B) 640 nm", "C) 740 nm", "D) 840 nm"],
+                correctAnswer: "D"
+            },
+            {
+                question: "Q12. A photon of wavelength 4×10⁻⁷m strikes on metal surface, the work function of the metal being 2.13 eV . Calculate  the energy of the photon (eV), the kinetic energy of the emission, and the velocity of the photoelectron (1eV = 1.6020×10⁻¹⁹J).",
+                options: ["A) Energy: 3.1 eV, Kinetic Energy: 0.97 eV, Velocity: 8.3×10⁵m/s", "B) Energy: 4.1 eV, Kinetic Energy: 1.97 eV, Velocity: 9.3×10⁵m/s", "C) Energy: 5.1 eV, Kinetic Energy: 2.97 eV, Velocity: 10.3×10⁵m/s", "D) Energy: 6.1 eV, Kinetic Energy: 3.97 eV, Velocity: 11.×10⁵m/s"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q13. What will be the wavelength of a ball of mass 0.1 kg moving with a velocity of 10m/s?",
+                options: ["A) 6.626×10⁻³⁵m", "B) 6.626×10⁻³⁴m", "C) 6.626×10⁻³³m", "D) 6.626×10⁻³²m"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q14. The mass of an electron is 9.1×10⁻³¹kg. If its K.E. is 3.0×10⁻²⁵J, calculate its wavelength.",
+                options: ["A) 1.96×10⁻¹⁰m", "B) 1.96×10⁻⁹m", "C) 1.96×10⁻⁸m", "D) 1.96×10⁻⁷m"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q15. Calculate the mass of a photon with wavelength 3.6Å.",
+                options: ["A) 1.09×10⁻³⁵kg", "B) 1.09×10⁻³⁴kg", "C) 1.09×10⁻³³kg", "D) 1.09×10⁻³²kg"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q16. Calculate the energy associated with the first orbit of He⁺. What is the radius of this orbit?",
+                options: ["A) Energy: -8.72×10⁻¹⁸J, Radius: 1.5×10⁻¹¹m", "B) Energy: -8.72×10⁻¹⁷J, Radius: 1.5×10⁻¹⁰m", "C) Energy: -8.72×10⁻¹⁹J, Radius: 1.5×10⁻⁹m", "D) Energy: -8.72×10⁻²⁰J, Radius: 1.5×10⁻⁸m"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q17. How much energy is required to ionise a H atom if the electron occupies n = 5 orbit?",
+                options: ["A) 5.44×10⁻²⁰J", "B) 5.44×10⁻¹⁹J", "C) 5.44×10⁻¹⁸J", "D) 5.44×10⁻¹⁷J"],
+                correctAnswer: "B"
+            },
+            {
+                question: "Q18. (i) The energy associated with the first orbit in the hydrogen atom is -2.18×10⁻¹⁸Jatom⁻¹. What is the energy associated with the fifth orbit?",
+                options: ["A) -2.18×10⁻²⁰J", "B) -2.18×10⁻¹⁹J", "C)  -2.18×10⁻¹⁷J", "D)  -2.18×10⁻¹⁶J"],
+                correctAnswer: "B"
+            },
+            {
+                question: "Q18. (ii) Calculate the radius of Bohr's fifth orbit for hydrogen atom.",
+                options: ["A) 1.3×10⁻¹⁰m", "B)  1.3×10⁻⁹m", "C)  1.3×10⁻⁸m", "D)  1.3×10⁻⁷m"],
+                correctAnswer: "B"
+            },
+            {
+                question: "Q19. A microscope using suitable photons is employed to locate an electron in an atom within a distance of 0.1Å. What is the uncertainty involved in the measurement of its velocity?",
+                options: ["A)  7.5×10⁶m/s", "B)  7.5×10⁵m/s", "C)   7.5×10⁴m/s", "D)   7.5×10³m/s"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q20. A golf ball has a mass of 40 g , and a speed of 45m/s. If the speed can be measured within accuracy of 2%, calculate the uncertainty in the position.",
+                options: ["A) 1.125×10⁻³m", "B) 1.125×10⁻²m", "C)  1.125×10⁻¹m", "D)  1.125×10⁰m"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q21. The wavefunction of an electron in the lowest energy state of a hydrogen atom is proportional to e^(-r/a∘), with a∘ a constant and r the distance from the nucleus. Calculate the relative probabilities of finding the electron inside a region of volume δV = 1.0pm³, which is small even on the scale of the atom, located at the nucleus and at a distance a∘ from the nucleus.",
+                options: ["A) Nucleus: 1, Distance(a∘): 0.37", "B) Nucleus: 0.5, Distance(a∘): 0.37", "C) Nucleus: 0.37, Distance(a∘): 0.1", "D) Nucleus: 0.1, Distance(a∘): 0.37"],
+                correctAnswer: "A" 
+            },
+            {
+                question: "Q22. The wavefunction of an electron in the lowest energy state of a hydrogen atom is proportional to  e^(-r/a∘), with a∘ a constant and r the distance from the nucleus. Find the  normalization constant for the wavefunction.",
+                options: ["A) √(1/πa∘³)", "B)  √(2/πa∘³)", "C)  √(3/πa∘³)", "D)  √(4/πa∘³)"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q23. The wavefunction for the electron in its lowest energy state in the ion He⁺ is proportional to e^(-2r/a∘). Find the normalization constant for the wavefunction.",
+                options: ["A) √(1/πa∘³)", "B)  √(2/πa∘³)", "C)  √(4/πa∘³)", "D)  √(8/πa∘³)"],
+                correctAnswer: "C"
+            },
+            {
+                question: "Q24. find the eigenvalue of e^(ax²) for the operator d/dx.",
+                options: ["A) Eigenvalue: a", "B) Eigenvalue: a²", "C) Eigenvalue: 2a", "D) Eigenvalue: a/2"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q25. Is the function cos(ax) an eigenfunction of (a) d/dx, (b)  d²/dx²?",
+                options: ["A) Yes, Yes", "B) No, Yes", "C) Yes, No", "D) No, No"],
+                correctAnswer: "B"
+            },
+            {
+                question: "Q26. The operator for the angular momentum of a particle travelling in a circle in the xy-plane is  îz=(ℏ/i)(d/dϕ), where ϕ is its angular position. What is the angular momentum of a particle described by the wavefunction e^(2iϕ)?",
+                options: ["A) 2ℏ", "B) -2ℏ", "C) ℏ", "D) ℏ"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q27. Evaluate the expectation value of kinetic energy of a particle in a one-dimensional box.",
+                options: ["A) n²h²/8ma²", "B)  n²h²/4ma²", "C) n²h²/2ma²", "D)  n²h²/ma²"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q28. Is the wavefunction ψ=√(2/a) sin(nπx/a) is normalized?.",
+                options: ["A) Yes", "B) No"],
+                correctAnswer: "A"
+            },
+            {
+                question: "Q29. Calculate the probability that a particle will be found between '0.49a' and '0.51a' in a box of length 'a' when the particle is in  n = 2 state. The particle in a box wave function is given by  ψ=√(2/a) sin(πx/a).",
+                options: ["A) 0.02", "B) 0.04", "C) 0.06", "D) 0.08"],
+                correctAnswer: "B"
+            },
+        ];
 
-        <!-- Question 4 -->
-        <div class="question" id="q4">
-          <h2>4. What is the shape of the path of electrons in Rutherford's model?</h2>
-          <label><input type="radio" name="q4" value="a"> Circular</label><br>
-          <label><input type="radio" name="q4" value="b"> Elliptical</label><br>
-          <label><input type="radio" name="q4" value="c"> Linear</label><br>
-          <label><input type="radio" name="q4" value="d"> Random</label>
-        </div>
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
 
-        <!-- Question 5 -->
-        <div class="question" id="q5">
-          <h2>5. Which of the following was NOT a feature of Rutherford’s atomic model?</h2>
-          <label><input type="radio" name="q5" value="a"> Presence of a dense nucleus</label><br>
-          <label><input type="radio" name="q5" value="b"> Electrons orbit in fixed paths</label><br>
-          <label><input type="radio" name="q5" value="c"> Atoms are mostly empty space</label><br>
-          <label><input type="radio" name="q5" value="d"> Distribution of electrons in energy levels</label>
-        </div>
+        function loadQuestion(index) {
+            const questionText = document.getElementById('questionText');
+            const optionsList = document.getElementById('optionsList');
+            const resultDiv = document.getElementById('result');
 
-        <!-- Timer and Submit Button -->
-        <div class="quiz-controls">
-          <p id="timer">Time Remaining: <span id="time">60</span> seconds</p>
-          <button type="submit" class="btn">Submit Quiz</button>
-        </div>
-      </form>
-    </section>
+            questionText.innerHTML = questions[index].question;
+            optionsList.innerHTML = '';
 
-    <section class="results-container" id="results" style="display: none;">
-      <h2>Your Results</h2>
-      <p id="score"></p>
-      <button onclick="location.reload()">Retry Quiz</button>
-    </section>
-  </main>
+            questions[index].options.forEach((option, idx) => {
+                const li = document.createElement('li');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'answer';
+                input.value = String.fromCharCode(65 + idx); // A, B, C, D
+                input.id = opt${String.fromCharCode(65 + idx)};
+                const label = document.createElement('label');
+                label.htmlFor = input.id;
+                label.textContent = option;
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsList.appendChild(li);
+            });
 
-  <footer>
-    <p>&copy; 2024 Rutherford's Atomic Model Quiz. All Rights Reserved.</p>
-  </footer>
+            resultDiv.textContent = '';
+            resultDiv.classList.remove('correct', 'incorrect');
 
-  <script src="script3.js"></script>
+            // Hide next button on the last question
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById('nextBtn').classList.add('hidden');
+            } else {
+                document.getElementById('nextBtn').classList.remove('hidden');
+            }
+
+            // Hide the "Previous" button on the first question
+            if (currentQuestionIndex === 0) {
+                document.getElementById('prevBtn').classList.add('hidden-prev');
+            } else {
+                document.getElementById('prevBtn').classList.remove('hidden-prev');
+            }
+
+            // Re-render MathJax
+            MathJax.typesetPromise();
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            const resultDiv = document.getElementById('result');
+            const options = document.querySelectorAll('.options li');
+
+            if (!selectedOption) {
+                resultDiv.textContent = 'Please select an answer.';
+                resultDiv.classList.remove('correct', 'incorrect');
+                return;
+            }
+
+            const selectedAnswer = selectedOption.value;
+            const correctAnswer = questions[currentQuestionIndex].correctAnswer;
+
+            options.forEach(option => {
+                option.classList.remove('correct-answer', 'incorrect-answer', 'highlighted');
+            });
+
+            const selectedLabel = selectedOption.parentNode;
+            if (selectedAnswer === correctAnswer) {
+                selectedLabel.classList.add('correct-answer');
+                resultDiv.textContent = 'Correct!';
+                resultDiv.classList.add('correct');
+                resultDiv.classList.remove('incorrect');
+                correctAnswers++; // Increment score on correct answer
+            } else {
+                selectedLabel.classList.add('incorrect-answer');
+                resultDiv.textContent = Incorrect! The correct answer is ${correctAnswer}.;
+                resultDiv.classList.add('incorrect');
+                resultDiv.classList.remove('correct');
+            }
+
+            const correctLabel = document.querySelector(#opt${correctAnswer}).parentNode;
+            correctLabel.classList.add('correct-answer');
+
+            // Disable radio buttons after submission
+            optionsList.classList.add('disabled');
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            } else {
+                // Show the score when the user reaches the last question
+                document.getElementById('quiz').classList.add('hidden');
+                document.getElementById('scoreSection').classList.remove('hidden');
+                document.getElementById('score').textContent = You answered ${correctAnswers} out of ${questions.length} questions correctly.;
+            }
+        }
+
+        // Load the first question
+        loadQuestion(currentQuestionIndex);
+    </script>
+
 </body>
 </html>
-
