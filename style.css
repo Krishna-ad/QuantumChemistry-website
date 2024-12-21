@@ -1,0 +1,417 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Fonts */
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  background: #f5f5f5;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 50, 0.8), rgba(0, 0, 100, 0.8)), url('background.jpg') no-repeat center center/cover;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero p {
+  margin: 20px 0;
+  font-size: 1.2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+/* Section Styles */
+.section {
+  padding: 60px 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  margin: 20px;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.background {
+  height: 100vh; /* Full-screen height */
+  background: url('transparent-image.png') no-repeat center center/cover;
+  /* You can also adjust the opacity if needed */
+  background-color: rgba(255, 255, 255, 0.8); /* Fallback color with opacity */
+}
+
+.transparent-image {
+  width: 60%;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+}
+
+.transparent-image:hover {
+  transform: scale(1.1);
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+/* Contact Section */
+.section.contact {
+  background: linear-gradient(to right, #1a1a2e, #0f3460);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+button[type="submit"] {
+  background-color: #00a8cc;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #005f73;
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 50, 0.9);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Team Section */
+.section.team {
+  background: linear-gradient(to right, #0f3460, #1a1a2e);
+  color: white;
+}
+
+.section.team h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.section.team p {
+  font-size: 1.2rem;
+}
+/* About Section */
+.section.about {
+  background: linear-gradient(to right, #16213e, #1a1a2e);
+  color: #ffffff;
+}
+
+.section.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #1a1a2e, #16213e);
+  color: white;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Section */
+header {
+  background: linear-gradient(to right, #0f3460, #1a1a2e);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #00a8cc;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 10px 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  background: linear-gradient(to right, #00a8cc, #005f73);
+}
+
+nav ul li a:hover {
+  background: linear-gradient(to left, #00a8cc, #005f73);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 168, 204, 0.8);
+}
+
+/* Section Header */
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  color: #00a8cc;
+  letter-spacing: 1.5px;
+}
+
+/* Research Section */
+.section {
+  padding: 60px 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 40px;
+}
+
+.section:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Navigation Menu Styling */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #ffffff;
+  padding: 10px 15px;
+  background: linear-gradient(45deg, #00a8cc, #005f73);
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  background: linear-gradient(to right, #00a8cc, #00d2ff);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 168, 204, 0.7);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 50, 0.9);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+  font-size: 1rem;
+}
+
+
+  
+
+

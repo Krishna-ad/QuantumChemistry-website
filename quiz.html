@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rutherford's Atomic Model Quiz">
+  <title>Rutherford's Atomic Model Quiz</title>
+  <link rel="stylesheet" href="quiz-style.css">
+</head>
+<body>
+  <header class="quiz-header">
+    <h1>Rutherford's Atomic Model Quiz</h1>
+    <p>Test your knowledge of Rutherford's contributions to atomic theory.</p>
+  </header>
+
+  <main>
+    <section class="quiz-container">
+      <form id="quiz-form">
+        <!-- Question 1 -->
+        <div class="question" id="q1">
+          <h2>1. What was the key experiment that led Rutherford to propose his atomic model?</h2>
+          <label><input type="radio" name="q1" value="a"> Gold Foil Experiment</label><br>
+          <label><input type="radio" name="q1" value="b"> Oil Drop Experiment</label><br>
+          <label><input type="radio" name="q1" value="c"> Cathode Ray Experiment</label><br>
+          <label><input type="radio" name="q1" value="d"> Electron Beam Experiment</label>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question" id="q2">
+          <h2>2. What was the main conclusion from Rutherford's Gold Foil Experiment?</h2>
+          <label><input type="radio" name="q2" value="a"> Atoms are solid and indivisible</label><br>
+          <label><input type="radio" name="q2" value="b"> Electrons orbit around a dense nucleus</label><br>
+          <label><input type="radio" name="q2" value="c"> The nucleus is positively charged and contains most of the atom's mass</label><br>
+          <label><input type="radio" name="q2" value="d"> The nucleus is negatively charged</label>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question" id="q3">
+          <h2>3. What did Rutherford's atomic model fail to explain?</h2>
+          <label><input type="radio" name="q3" value="a"> The stability of atoms</label><br>
+          <label><input type="radio" name="q3" value="b"> The presence of electrons</label><br>
+          <label><input type="radio" name="q3" value="c"> The existence of the nucleus</label><br>
+          <label><input type="radio" name="q3" value="d"> The mass of the nucleus</label>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question" id="q4">
+          <h2>4. What is the shape of the path of electrons in Rutherford's model?</h2>
+          <label><input type="radio" name="q4" value="a"> Circular</label><br>
+          <label><input type="radio" name="q4" value="b"> Elliptical</label><br>
+          <label><input type="radio" name="q4" value="c"> Linear</label><br>
+          <label><input type="radio" name="q4" value="d"> Random</label>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question" id="q5">
+          <h2>5. Which of the following was NOT a feature of Rutherford’s atomic model?</h2>
+          <label><input type="radio" name="q5" value="a"> Presence of a dense nucleus</label><br>
+          <label><input type="radio" name="q5" value="b"> Electrons orbit in fixed paths</label><br>
+          <label><input type="radio" name="q5" value="c"> Atoms are mostly empty space</label><br>
+          <label><input type="radio" name="q5" value="d"> Distribution of electrons in energy levels</label>
+        </div>
+
+        <!-- Timer and Submit Button -->
+        <div class="quiz-controls">
+          <p id="timer">Time Remaining: <span id="time">60</span> seconds</p>
+          <button type="submit" class="btn">Submit Quiz</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="results-container" id="results" style="display: none;">
+      <h2>Your Results</h2>
+      <p id="score"></p>
+      <button onclick="location.reload()">Retry Quiz</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Rutherford's Atomic Model Quiz. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script3.js"></script>
+</body>
+</html>
+

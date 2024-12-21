@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wave Function</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+  <header>
+    <h1>Wave Function</h1>
+    <p>The mathematical description of quantum systems and their probabilistic nature.</p>
+  </header>
+
+  <section class="content">
+    <div class="grid">
+      <div class="grid-item">
+        <img src="wave-function-overview.jpg" alt="Wave Function Overview">
+        <h2>What is a Wave Function?</h2>
+        <p>The wave function, denoted by Ψ (psi), is a mathematical function that describes the quantum state of a system and contains all the information about a particle's position, momentum, and energy.</p>
+      </div>
+      <div class="grid-item">
+        <img src="wave-function-collapse.jpg" alt="Wave Function Collapse">
+        <h2>Wave Function Collapse</h2>
+        <p>The wave function represents probabilities. Upon measurement, it collapses to a definite state, aligning with the observed outcome.</p>
+      </div>
+      <div class="grid-item">
+        <img src="wave-function-applications.jpg" alt="Applications of Wave Functions">
+        <h2>Applications</h2>
+        <p>Wave functions are crucial in quantum mechanics, providing the basis for understanding atomic structure, molecular bonding, and quantum computing.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Wave Function Exploration</p>
+  </footer>
+</body>
+</html>

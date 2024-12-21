@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about the structure of the atom, subatomic particles, and their roles in chemistry.">
+    <title>Structure of the Atom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #3f51b5;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        h1, h2, h3 {
+            color: #3f51b5;
+        }
+        .atom-diagram {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .atom {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(63, 81, 181, 0.1);
+        }
+        .nucleus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            margin: -50px;
+            background-color: rgba(63, 81, 181, 0.5);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 100px;
+            color: white;
+            font-weight: bold;
+        }
+        .electron {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f44336;
+            border-radius: 50%;
+        }
+        .electron:nth-child(1) { top: 10%; left: 50%; }
+        .electron:nth-child(2) { top: 50%; left: 10%; }
+        .electron:nth-child(3) { top: 80%; left: 50%; }
+        .electron:nth-child(4) { top: 50%; left: 80%; }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #3f51b5;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Structure of the Atom</h1>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>An atom is the basic unit of matter that defines the chemical elements. Atoms are composed of three fundamental subatomic particles: protons, neutrons, and electrons.</p>
+        </section>
+
+        <section id="subatomic-particles">
+            <h2>Subatomic Particles</h2>
+            <ul>
+                <li><strong>Protons:</strong> Positively charged particles located in the nucleus of the atom.</li>
+                <li><strong>Neutrons:</strong> Neutral particles also found in the nucleus that contribute to the atom's mass.</li>
+                <li><strong>Electrons:</strong> Negatively charged particles that orbit the nucleus in different energy levels or shells.</li>
+            </ul>
+        </section>
+
+        <section id="visual-representation">
+            <h2>Atomic Structure Diagram</h2>
+            <div class="atom-diagram">
+                <div class="atom">
+                    <div class="nucleus">Nucleus</div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Structure of the Atom | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
